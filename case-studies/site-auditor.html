@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site auditor, case study</title>
+  <meta name="description" content="Crawls the brand websites and reports what it can prove is broken: phone numbers that dial a sister brand, dead buttons, broken links, template fields that never got filled.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Site auditor, case study">
+  <meta property="og:description" content="Crawls the brand websites and reports what it can prove is broken: phone numbers that dial a sister brand, dead buttons, broken links, template fields that never got filled.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#site-auditor">District Behavioral Health</a></p>
+    <h1 class="display">Site auditor</h1>
+    <p class="lede">Crawls the brand websites and reports what it can prove is broken: phone numbers that dial a sister brand, dead buttons, broken links, template fields that never got filled.</p>
+    <p class="project-role">About 15,500 pages per full run across eight sites; the ninth is sampled. 1,089 tests.</p>
+    <div class="doc-actions"><a class="btn btn-ghost tool-link" href="https://github.com/sydashir/QA_district_Tool" target="_blank" rel="noopener">View code on GitHub<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>~15,500</b><span>pages per full run across eight sites</span></li><li><b>21</b><span>pages dialling a different District brand, 3 of them test pages</span></li><li><b>1,089</b><span>tests</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>httpx</li><li>Postgres</li><li>FastAPI</li><li>React</li><li>Playwright</li><li>Google Sheets API</li><li>Search Console API</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual hero-shot"><figure class="shot"><img src="../assets/auditor-dashboard.webp" width="1600" height="907" alt="The auditor dashboard: open errors across all brands, a banner naming the brand that could not be audited, and one card per brand with its errors, warnings and run history."></figure></div></div>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#problem">Problem</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#how-i-know-it-works">How I know it works</a></li><li><a href="#result">Result</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="problem">Problem</h2>
+<p>The brands' pages are generated from spreadsheets and imported into WordPress, and no automated check covered the live pages. One facility page had already shipped with call buttons pointing at the wrong number, and neither manual QA nor the existing tool caught it.</p>
+<figure><div class="shot"><img src="../assets/auditor-dial.webp" width="1570" height="515" loading="lazy" alt="A warning from the auditor's client report: a page shows one of the brand's phone numbers but its call button dials another, with a photo of the element outlined in red."></div><figcaption>A warning from a client report: the page shows one of the brand's numbers and dials another, with a photo of the element.</figcaption></figure>
+<h2 id="how-it-works">How it works</h2>
+<p>Each site is listed from its sitemap plus the WordPress REST API, then crawled with a per-brand concurrency limit. Fifteen deterministic checks run on every page. Faults that repeat because they live in a shared template are grouped into one fix each. Results go to a Google Sheet the QA team triages in, and to a FastAPI and React dashboard.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>List pages</li><li>Crawl politely</li><li>Run 15 checks</li><li>Group repeats</li><li class="hot">Refuse bad runs</li><li>Publish</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>Reporting its own failures as the client's. A throttled sitemap read once made a 15,635-page site look like 96 pages. A rate-limited run once reached 77 of 8,029 pages, was recorded as a normal run, and produced 7,777 "unreachable" findings: 97% of the site. A run that fetches under half its pages is now refused instead of published. I set that floor from 106 real runs, where the median fetch rate was 99.7%.</p>
+<h2 id="how-i-know-it-works">How I know it works</h2>
+<p>1,089 tests, and the working rule is that each new test is first run against the unfixed code to show it can fail. The text parser is gated by fragments mostly saved from live pages. On the corruption check, 59 of 60 findings checked against the live page were real. I also tried an LLM grammar pass and a dictionary spellchecker. Only 4 to 6% of the LLM's findings survived an adversarial review, and the spellchecker's precision was 9%, so neither shipped.</p>
+<figure><div class="shot"><img src="../assets/auditor-findings.webp" width="1400" height="975" loading="lazy" alt="The auditor dashboard's findings screen: repeated template faults grouped into one row with their page counts."></div><figcaption>The findings screen of the dashboard, with template faults grouped into one row each and a page count.</figcaption></figure>
+<h2 id="result">Result</h2>
+<p>It found 21 pages across four brands, 3 of them internal test pages, whose call button dialled a different District brand. After one brand rebuilt its site, it caught a dead "Learn More" button on 524 of 561 pages. Grouping template faults cut the report from 50,438 rows to 35,099, with each grouped row keeping its page count.</p>
+<figure><div class="shot"><img src="../assets/auditor-report.webp" width="1400" height="850" loading="lazy" alt="The top of a client report for one brand, with pages checked, open findings and certain problems, followed by its first section."></div><figcaption>The top of a per-brand client report.</figcaption></figure>
+<h2 id="stack">Stack</h2>
+<p>Python, httpx, Postgres, FastAPI, React, Playwright, Google Sheets and Search Console APIs.</p>
+<div class="doc-links"><a class="cta-link" href="../writing/crawler-failures.html">Write-up: when the crawler's failure looks like the client's outage <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="quiet-link" href="mailto:meetashirr@gmail.com">Code available on request</a></div>
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="../index.html#work"><small>Back to</small><b>All work</b></a><a class="next" href="authority-finder.html"><small>Next</small><b>Authority site finder</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

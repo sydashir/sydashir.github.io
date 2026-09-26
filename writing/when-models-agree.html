@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When two models agree on the wrong number</title>
+  <meta name="description" content="Reading handwritten factory test reports with vision models, and why agreement between readers from the same family let wrong values through.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="When two models agree on the wrong number">
+  <meta property="og:description" content="Reading handwritten factory test reports with vision models, and why agreement between readers from the same family let wrong values through.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#writing" aria-current="page">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head article-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#writing">Writing</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../case-studies/report-extraction.html">Handwritten test report extraction</a></p>
+    <h1 class="display">When two models agree on the wrong number</h1>
+    <p class="byline">September 2026</p>
+  </div>
+</header>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#the-baseline">The baseline</a></li><li><a href="#evidence-instead-of-confidence">Evidence instead of confidence</a></li><li><a href="#what-each-pass-did-in-the-delivered-run">What each pass did in the delivered run</a></li><li><a href="#where-it-ended">Where it ended</a></li><li><a href="#the-next-version">The next version</a></li><li><a href="#what-i-took-from-it">What I took from it</a></li></ol></nav>
+  <article class="prose">
+<p>A battery-storage project consultancy needed the results of supplier factory test reports pulled into Excel. One supplier's reports are 12-page scans. Inspectors write the values by hand: insulation resistance, charge and discharge energy, round-trip efficiency. Red stamps land on top of the numbers, and the table lines are faint.</p>
+
+    <p>The client wanted the values that need a human to be clearly marked. I turned that into one target: <b>zero silent errors</b>. A flagged error costs someone a quick check. An unflagged one can end up in an engineering decision.</p>
+
+    <h2 id="the-baseline">The baseline</h2>
+
+    <p>I started with an answer key: 90 values from six trial reports, reconciled by independent AI readers and blind judges. Against it, conventional OCR (PyMuPDF plus Tesseract) got 14 of 90 right. Claude Opus 5 reading the page images got 86. One strong reader did well on six reports. Across 71, the harder problem was knowing which answers to trust.</p>
+
+    <p>In a smoke test, the cheapest model read 36700 as 3670 and reported 0.98 confidence.</p>
+
+    <h2 id="evidence-instead-of-confidence">Evidence instead of confidence</h2>
+
+    <p>The pipeline finds each page by its content rather than its page number, since pages go missing, repeat or come in rotated. It cuts every value cell out of the table grid and reads each page twice: once whole, once as close-ups of the cells. A value is accepted when one of these holds:</p>
+
+    <ul>
+      <li>the written round-trip efficiency matches 100 × discharge ÷ charge energy within 0.006 points, so the handwriting is checked against its own arithmetic;</li>
+      <li>a typed serial number matches the OCR text or the file name;</li>
+      <li>the whole-page read and the close-up read agree. In the delivered run both reads came from OpenAI models, so this rule was itself same-family agreement, and the next version replaces it;</li>
+      <li>it is printed text, a tick box or the reviewer's name, read at 0.9 confidence or above.</li>
+    </ul>
+
+    <p>Everything else is flagged. When the efficiency check fails, a repair step looks for the combination of candidate readings that makes the maths work with the fewest changes. If two combinations tie, it flags the value instead of choosing. The overall pass or fail comes from OCR of the printed table, because a model once turned a passing report into "Fail"; the model's read is used only when OCR can't read the table. I also tried majority voting between reads and removed it, because two reads agreed on wrong values.</p>
+
+    <p>On the trial reports, with Claude Opus 5 reading, this reached 87 of 90, with the other 3 flagged and no silent errors.</p>
+
+    <h2 id="what-each-pass-did-in-the-delivered-run">What each pass did in the delivered run</h2>
+
+    <p>The delivered run used OpenAI models for both reads. The main run covered 69 of 71 reports, read 1,932 values, flagged 405 and cost $28.04. The passes after it were measured against the same 90 verified values:</p>
+
+    <div class="table-scroll"><table>
+      <thead><tr><th>Stage</th><th>Correct</th><th>Wrong, flagged</th><th>Wrong, silent</th></tr></thead>
+      <tbody>
+        <tr><td>Main run</td><td>75</td><td>15</td><td>0</td></tr>
+        <tr><td>+ third read of the same crop, same model</td><td>75</td><td>15</td><td>0</td></tr>
+        <tr><td>+ re-read of the full table row, same family</td><td>78</td><td>7</td><td>5</td></tr>
+        <tr><td>+ Claude Opus 5 on every flag</td><td>85</td><td>3</td><td>2</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>The full-row read helped. Seeing the code, requirement, units and handwriting together corrected values that a zoomed crop couldn't. But clearing a flag because it now agreed with an earlier read from the same model family produced 5 silent errors, where there had been none. In a later benchmark, accepting whenever the two OpenAI readers agreed would have accepted 74 cells, 8 of them wrong.</p>
+
+    <p>A reader from a different vendor fixed most of it. The Claude Opus 5 pass re-checked 1,159 values, settled 1,078 and corrected 92, for $16.34. An Opus 5.5 pass on what was still flagged settled 97 of 126 and corrected 52, for $1.56.</p>
+
+    <h2 id="where-it-ended">Where it ended</h2>
+
+    <p>After those passes the verified sample stood at 87 of 90, the same as the trial, but 2 of the 3 misses were silent: 1400 read for 14100 and 0.02 for 0.022. Every reader made the same misreading. Those cells were corrected from the answer key. All but 3 of the last 102 flags were settled before delivery; those 3 are on a page missing from one report. Most were one reviewer's signature, which was standardised. Each of the 32 real values was read by two blind AI readers zooming into the scan, with a judge where they disagreed. The delivered workbook has 71 reports and 1,988 values.</p>
+
+    <p>A range scan and a check for reader disagreement then surfaced 7 suspect values. Blind AI review found 3 were our misreads, now fixed, and 4 were written that way on the reports, outside the form's own limits.</p>
+
+    <p>What remains: on reports without verified values, expect a few percent of handwritten values to be misread in a way every reader agreed on. Of the 66 verified handwritten values, 2 were.</p>
+
+    <h2 id="the-next-version">The next version</h2>
+
+    <p>Reading whole pages is most of the cost, yet free OCR already finds every value cell. So I built a benchmark of 923 cell images and 1,207 values to choose readers for a cell-only version. Only 54 cells are verified gold; the rest are labelled with delivered values, which favours readers that agree with the pipeline. On a stratified 119-cell sample (151 values, 66 gold), single-reader accuracy was as below. The tool now runs on OpenAI only, so the Claude rows are for reference.</p>
+
+    <div class="table-scroll"><table>
+      <thead><tr><th>Model</th><th>Accuracy</th><th>Cost per report</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Opus 5.5</td><td>90.7%</td><td>$0.134</td></tr>
+        <tr><td>Claude Sonnet 5</td><td>84.8%</td><td>$0.056</td></tr>
+        <tr><td>GPT-5.6 sol</td><td>76.2%</td><td>$0.116</td></tr>
+        <tr><td>GPT-5.6 terra</td><td>73.5%</td><td>$0.055</td></tr>
+        <tr><td>GPT-5.6 luna</td><td>53.6%</td><td>$0.008</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>Telling the model each cell's unit and how the form writes its numbers took GPT-5.6 sol to 88.7% in a later run. The design I'm testing chains a free OCR engine, a cheap model and sol, and calls sol only where the first two disagree. On the sample it auto-accepted 80% of cells (95 of 119) with none wrong, at about $0.03 per report at batch prices for this first pass, or about $0.06 live. The delivered run's main pass cost about $0.41 per report. Zero wrong in 95 accepted cells still allows up to about 3% true error, so it needs a larger sample before anyone relies on it.</p>
+
+    <h2 id="what-i-took-from-it">What I took from it</h2>
+
+    <ul>
+      <li>Count silent errors separately from flagged ones. A single accuracy number hides them.</li>
+      <li>When two reads from one model family agree, they often share the same mistake, so their agreement is weak evidence. Agreement counts for more when the readers can fail in different ways.</li>
+      <li>The strongest checks come from the document itself: arithmetic that has to balance, serials that have to match. They are free and don't share a model's blind spots.</li>
+      <li>Not every report needed AI. The other supplier's reports are digital, and a deterministic parser read 153 of them, 22,950 measurements, with no parse failures and no model cost.</li>
+    </ul>
+    <div class="doc-links"><a class="cta-link" href="../case-studies/report-extraction.html">Read the handwritten test report extraction case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="quiet-link" href="mailto:meetashirr@gmail.com">meetashirr@gmail.com</a></div>
+  </article>
+</div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Handwritten test report extraction, case study</title>
+  <meta name="description" content="Reads scanned, handwritten factory test reports for battery-storage containers into Excel, and flags every value it can&#x27;t back up.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Handwritten test report extraction, case study">
+  <meta property="og:description" content="Reads scanned, handwritten factory test reports for battery-storage containers into Excel, and flags every value it can&#x27;t back up.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#report-extraction">Battery-storage project consultancy</a></p>
+    <h1 class="display">Handwritten test report extraction</h1>
+    <p class="lede">Reads scanned, handwritten factory test reports for battery-storage containers into Excel, and flags every value it can't back up.</p>
+    <p class="project-role">On a verified set of 90 values, plain OCR read 14 correctly. The trial pipeline, with Claude Opus 5 reading, got 87 and flagged the other 3.</p>
+    <div class="doc-actions"><span class="tool-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Client work. <a href="mailto:meetashirr@gmail.com">Walkthrough on request</a></span></span></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>87 of 90</b><span>values right in the trial pipeline, 3 flagged</span></li><li><b>1,988</b><span>values delivered from 71 reports</span></li><li><b>22,950</b><span>digital measurements parsed with no AI</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>PyMuPDF</li><li>Tesseract</li><li>PaddleOCR</li><li>OpenAI vision models</li><li>Claude vision models</li><li>Pydantic</li><li>Batch APIs</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual viz" data-waffle>
+  <div class="viz-inner">
+  <div class="waffle-top">
+    <div class="readout"><b data-w-num>87</b><span>of 90 verified values read correctly</span></div>
+    <div class="seg" role="radiogroup" aria-label="Which reader">
+      <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="ocr">Plain OCR</button>
+      <button type="button" role="radio" aria-checked="true" tabindex="0" data-mode="trial">Trial pipeline</button>
+      <button type="button" role="radio" aria-checked="false" tabindex="-1" data-mode="delivered">Delivered run</button>
+    </div>
+  </div>
+  <div class="waffle" aria-hidden="true"><i style="--i:0" class="ok"></i><i style="--i:1" class="ok"></i><i style="--i:2" class="ok"></i><i style="--i:3" class="ok"></i><i style="--i:4" class="ok"></i><i style="--i:5" class="ok"></i><i style="--i:6" class="ok"></i><i style="--i:7" class="ok"></i><i style="--i:8" class="ok"></i><i style="--i:9" class="ok"></i><i style="--i:10" class="ok"></i><i style="--i:11" class="ok"></i><i style="--i:12" class="ok"></i><i style="--i:13" class="ok"></i><i style="--i:14" class="ok"></i><i style="--i:15" class="ok"></i><i style="--i:16" class="ok"></i><i style="--i:17" class="ok"></i><i style="--i:18" class="ok"></i><i style="--i:19" class="ok"></i><i style="--i:20" class="ok"></i><i style="--i:21" class="ok"></i><i style="--i:22" class="ok"></i><i style="--i:23" class="ok"></i><i style="--i:24" class="ok"></i><i style="--i:25" class="ok"></i><i style="--i:26" class="ok"></i><i style="--i:27" class="ok"></i><i style="--i:28" class="ok"></i><i style="--i:29" class="ok"></i><i style="--i:30" class="ok"></i><i style="--i:31" class="ok"></i><i style="--i:32" class="ok"></i><i style="--i:33" class="ok"></i><i style="--i:34" class="ok"></i><i style="--i:35" class="ok"></i><i style="--i:36" class="ok"></i><i style="--i:37" class="ok"></i><i style="--i:38" class="ok"></i><i style="--i:39" class="ok"></i><i style="--i:40" class="ok"></i><i style="--i:41" class="ok"></i><i style="--i:42" class="ok"></i><i style="--i:43" class="ok"></i><i style="--i:44" class="ok"></i><i style="--i:45" class="ok"></i><i style="--i:46" class="ok"></i><i style="--i:47" class="ok"></i><i style="--i:48" class="ok"></i><i style="--i:49" class="ok"></i><i style="--i:50" class="ok"></i><i style="--i:51" class="ok"></i><i style="--i:52" class="ok"></i><i style="--i:53" class="ok"></i><i style="--i:54" class="ok"></i><i style="--i:55" class="ok"></i><i style="--i:56" class="ok"></i><i style="--i:57" class="ok"></i><i style="--i:58" class="ok"></i><i style="--i:59" class="ok"></i><i style="--i:60" class="ok"></i><i style="--i:61" class="ok"></i><i style="--i:62" class="ok"></i><i style="--i:63" class="ok"></i><i style="--i:64" class="ok"></i><i style="--i:65" class="ok"></i><i style="--i:66" class="ok"></i><i style="--i:67" class="ok"></i><i style="--i:68" class="ok"></i><i style="--i:69" class="ok"></i><i style="--i:70" class="ok"></i><i style="--i:71" class="ok"></i><i style="--i:72" class="ok"></i><i style="--i:73" class="ok"></i><i style="--i:74" class="ok"></i><i style="--i:75" class="ok"></i><i style="--i:76" class="ok"></i><i style="--i:77" class="ok"></i><i style="--i:78" class="ok"></i><i style="--i:79" class="ok"></i><i style="--i:80" class="ok"></i><i style="--i:81" class="ok"></i><i style="--i:82" class="ok"></i><i style="--i:83" class="ok"></i><i style="--i:84" class="ok"></i><i style="--i:85" class="ok"></i><i style="--i:86" class="ok"></i><i style="--i:87" class="flag"></i><i style="--i:88" class="flag"></i><i style="--i:89" class="flag"></i></div>
+  <p class="waffle-note" data-w-note aria-live="polite">With Claude Opus 5 reading, 87 of 90, with the other 3 flagged and no silent errors.</p>
+  <div hidden>
+    <span data-note="ocr">Conventional OCR (PyMuPDF plus Tesseract) got 14 of 90 right.</span>
+    <span data-note="trial">With Claude Opus 5 reading, 87 of 90, with the other 3 flagged and no silent errors.</span>
+    <span data-note="delivered">The delivered run also reached 87 of 90, but 2 of its misses were silent, digit-level misreads every reader repeated. Those cells were corrected from the answer key.</span>
+  </div>
+  <ul class="legend"><li><i class="ok"></i>Correct</li><li><i class="flag"></i>Wrong, flagged</li><li><i class="silent"></i>Wrong, silent</li><li><i></i>Missed by plain OCR</li></ul>
+  </div>
+</div></div>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#problem">Problem</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#how-i-know-it-works">How I know it works</a></li><li><a href="#result">Result</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="problem">Problem</h2>
+<p>A battery-storage project consultancy needed the results from hundreds of supplier test reports in Excel. One supplier's reports are 12-page scans with handwritten values, red stamps and faint ruled lines. The client wanted every value that needs a human clearly marked, so I set the target as zero silent errors: no confidently wrong value that nobody is told about.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>The other supplier's reports are digital, and a deterministic parser read 153 of them, 22,950 measurements, with no AI and no parse failures. For the scans, OCR finds each page by its content, grid detection cuts out every value cell, and a vision model reads the page and then each cell close up. A value is accepted when the written efficiency matches the energy readings it is calculated from, a typed serial matches the OCR text, or the page read and the close-up read agree. Printed text, tick boxes and the reviewer's name can also pass on high model confidence. Everything else is flagged.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>Find each page</li><li>Cut out cells</li><li>Vision read</li><li>Close-up read</li><li class="hot">Check the maths</li><li>Tie-break</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>Readers that agree on the same wrong digit. The cheapest model read 36700 as 3670 at 0.98 confidence. In the delivered run both reads came from OpenAI models, and re-reading flags with the same family let wrong values through as confirmed, so flagged values also went to a model from a different vendor. Values are never accepted by majority vote. The next version accepts a value only when a free OCR engine and an OpenAI model agree, tested in simulation so far.</p>
+<h2 id="how-i-know-it-works">How I know it works</h2>
+<p>A verified answer key of 90 values scored every stage, counting silent errors separately from flagged ones. The delivered run also reached 87 of 90, but 2 of its misses were silent, digit-level misreads every reader repeated. Those cells were corrected from the answer key.</p>
+<h2 id="result">Result</h2>
+<p>71 scanned reports and 1,988 values delivered. Before delivery, 32 uncertain values were settled by two blind AI readers and a judge, and 67 flags on one reviewer's signature were standardised. On reports without verified values, expect a few percent of handwritten values to be misread in a way every reader agreed on; 2 of the 66 verified ones were. A cheaper design costs about $0.03 per report at batch prices for its first pass, against about $0.41 for the delivered run's main pass, and still needs a larger test.</p>
+<h2 id="stack">Stack</h2>
+<p>Python, PyMuPDF, Tesseract, PaddleOCR, OpenAI and Claude vision models, Pydantic, Batch APIs.</p>
+<div class="doc-links"><a class="cta-link" href="../writing/when-models-agree.html">Write-up: when two models agree on the wrong number <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="review-payouts.html"><small>Previous</small><b>Review payout automation</b></a><a class="next" href="hirely.html"><small>Next</small><b>Hirely job agent</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

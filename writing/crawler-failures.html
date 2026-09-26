@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>When the crawler's failure looks like the client's outage</title>
+  <meta name="description" content="Three times a site auditor reported its own access problems as the client&#x27;s defects. What each looked like and the guard that stops it now.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="When the crawler&#x27;s failure looks like the client&#x27;s outage">
+  <meta property="og:description" content="Three times a site auditor reported its own access problems as the client&#x27;s defects. What each looked like and the guard that stops it now.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#writing" aria-current="page">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head article-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#writing">Writing</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../case-studies/site-auditor.html">Site auditor</a></p>
+    <h1 class="display">When the crawler's failure looks like the client's outage</h1>
+    <p class="byline">September 2026</p>
+  </div>
+</header>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#1-a-sitemap-that-was-only-partly-read">1. A sitemap that was only partly read</a></li><li><a href="#2-a-run-that-reached-almost-nothing-and-was-recorded-as-fine">2. A run that reached almost nothing and was recorded as fine</a></li><li><a href="#3-three-sites-down-at-once-caused-by-the-crawler">3. Three sites down at once, caused by the crawler</a></li><li><a href="#what-i-measured-before-trusting-any-rate">What I measured before trusting any rate</a></li><li><a href="#what-is-still-not-fixed">What is still not fixed</a></li><li><a href="#the-rule-underneath-all-three">The rule underneath all three</a></li></ol></nav>
+  <article class="prose">
+<p>I built a site auditor for District Behavioral Health, a group of treatment brands with nine websites. A full run covers about 15,500 pages across eight of the sites; the ninth is sampled because its host can't take more. It reports problems it can prove: phone numbers that dial a sister brand, dead buttons, broken links, template fields that never got filled.</p>
+
+    <p>The problem I didn't expect was a report that looked exactly like a real finding but was actually about my crawler. A client who reads "97% of your site is unreachable" does not stop to ask whether the crawler was having a bad night. They escalate. So a false alarm costs more than a missed bug: it spends the trust that makes every other finding worth reading.</p>
+
+    <p>It happened three different ways.</p>
+
+    <h2 id="1-a-sitemap-that-was-only-partly-read">1. A sitemap that was only partly read</h2>
+
+    <p>On one run the Inpatient Mental Health Finder sitemap, 15,635 URLs spread over eleven child sitemaps, came back as 96 URLs. The read ran at concurrency 5 with a single retry, the host throttled it, and about ten of the eleven child files failed without raising anything. The audit compared the pages it could see against the ones it expected, and reported that about 1% of the site was covered.</p>
+
+    <p>That finding was retracted. The fix made "I could not read part of the index" a separate state instead of an empty result:</p>
+
+    <ul>
+      <li>the sitemap reader now returns the child files that failed, not just the URLs it got;</li>
+      <li>a partial read is treated as untrustworthy, and page listing falls back to the WordPress REST API;</li>
+      <li>when the read was partial, coverage findings are withheld altogether.</li>
+    </ul>
+
+    <p>Re-checking every brand with the fixed code showed the bug had hit more than one site. One brand went from 511 listed URLs to 10,740, nearly all of them duplicate "doorway" pages, which became a finding of their own. A coverage headline for another brand came from the same partial read and was retracted.</p>
+
+    <h2 id="2-a-run-that-reached-almost-nothing-and-was-recorded-as-fine">2. A run that reached almost nothing and was recorded as fine</h2>
+
+    <p>Renaissance Recovery is the largest site, about 8,000 pages. One run reached 77 of 8,029 of them. It produced 7,777 "page unreachable" findings, which amounts to telling the client that 97% of their website is down. The run was recorded as successful, because the only check was whether zero pages had been audited.</p>
+
+    <p>The fix is a floor: a run that fetches under half of its pages is refused and publishes nothing. The 50% comes from the history. Across 106 earlier runs, the median fetch rate was 99.7% and the tenth percentile 90.5%. Exactly one run had ever fallen below 50%, and it was this one. I also designed a relative test, "refuse when a brand collapses below its own normal", and measured it. At the tightest ratio that was still safe, it sat below the absolute floor for every brand, so it could never fire. It was dropped.</p>
+
+    <p>The floor has since worked on its own. A later run of the throttled directory site reached 334 of 900 pages (37%) and was refused, instead of publishing 566 false "unreachable" findings.</p>
+
+    <h2 id="3-three-sites-down-at-once-caused-by-the-crawler">3. Three sites down at once, caused by the crawler</h2>
+
+    <p>At 05:58 one morning, the queue started three brands within eight seconds of each other. The run before them had just finished with a burst of about 400 link-check requests. All three were rate-limited, failed to list their pages in two or three seconds, and were recorded as "the website was unreachable". Ten minutes later all three served normally.</p>
+
+    <p>The fix is a 90-second cooldown between crawls. It was chosen to be longer than a typical rate-limit window, and it hasn't been tested against a repeat of that burst. The code comment says it is not tuned.</p>
+
+    <h2 id="what-i-measured-before-trusting-any-rate">What I measured before trusting any rate</h2>
+
+    <p>The throttled directory site taught me to measure concurrency against a real host instead of guessing. On cold pages:</p>
+
+    <div class="table-scroll"><table>
+      <thead><tr><th>Concurrency</th><th>Pages that loaded</th><th>Rate</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>90%</td><td>0.024 pages/s</td></tr>
+        <tr><td>2</td><td>90%</td><td>0.032 pages/s</td></tr>
+        <tr><td>3</td><td>30%</td><td>throttled</td></tr>
+        <tr><td>4</td><td>0%</td><td>20 of 24 requests returned HTTP 500</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>At concurrency 4 the site kept failing for minutes after the test ended, and the next audit could not even read its sitemap. So 2 is a locked ceiling, and I never tested 6: the test itself would have hurt a client's production site. The largest site needed the opposite. Its "unreachable" pages were slow first renders of about 20 seconds, not dead pages. A 45-second timeout at concurrency 10 fetched 98.6% of it.</p>
+
+    <h2 id="what-is-still-not-fixed">What is still not fixed</h2>
+
+    <p>A refused or short run still becomes the baseline the next run is compared against. After the 77-page run, the next run reported 11,259 "new" findings against a real 128. The open counts are always correct; only the new-versus-old split is wrong, and it corrects itself after one full run. Fixing it properly means invalidating every brand's crawl cache, so for now the report detects the situation and tells the reader to ignore that one figure.</p>
+
+    <h2 id="the-rule-underneath-all-three">The rule underneath all three</h2>
+
+    <p>Each time, the tool said something about the client when the evidence was about the tool. The fixes share one shape: keep "I couldn't look" separate from "I looked and it's broken", all the way from the crawler to the report. When the tool couldn't look, the report says that.</p>
+
+    <p class="aside">The code is public: <a href="https://github.com/sydashir/QA_district_Tool" target="_blank" rel="noopener">github.com/sydashir/QA_district_Tool</a>.</p>
+    <div class="doc-links"><a class="cta-link" href="../case-studies/site-auditor.html">Read the site auditor case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="quiet-link" href="mailto:meetashirr@gmail.com">meetashirr@gmail.com</a></div>
+  </article>
+</div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

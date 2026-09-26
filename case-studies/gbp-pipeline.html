@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Business Profile content pipeline, case study</title>
+  <meta name="description" content="Finds local news for a treatment group&#x27;s 28 Google Business Profile listings, writes two post options per article with a matching image, and schedules what a person approves.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Google Business Profile content pipeline, case study">
+  <meta property="og:description" content="Finds local news for a treatment group&#x27;s 28 Google Business Profile listings, writes two post options per article with a matching image, and schedules what a person approves.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#gbp-pipeline">District Behavioral Health</a></p>
+    <h1 class="display">Google Business Profile content pipeline</h1>
+    <p class="lede">Finds local news for a treatment group's 28 Google Business Profile listings, writes two post options per article with a matching image, and schedules what a person approves.</p>
+    <p class="project-role">2,621 post variations scheduled since April, from local news and a topic library. Every one approved by a person first.</p>
+    <div class="doc-actions"><span class="tool-group"><a class="btn btn-ghost tool-link" href="https://gbp-autopost.districtbhg.com/" target="_blank" rel="noopener">Open the live tool<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><span class="tool-hint">staff sign-in only</span></span></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>2,621</b><span>post variations scheduled since April</span></li><li><b>28</b><span>listings configured, 23 with posts scheduled</span></li><li><b>9 days</b><span>from first commit to first scheduled post</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>Streamlit</li><li>SQLAlchemy</li><li>Claude</li><li>Gemini image models</li><li>SerpAPI</li><li>DataForSEO</li><li>Cloudinary</li><li>Zapier</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual duo">
+  <figure class="shot"><img src="../assets/gbp-hero.webp" width="770" height="320" alt="The pipeline's landing page headline: local news in, scheduled posts out."></figure>
+  <figure class="shot"><img src="../assets/gbp-post.webp" width="568" height="535" alt="A real approved post for Gratitude Lodge in Newport Beach, written from a Los Angeles Times article about a local kratom ban, at 807 of 1,500 characters."></figure>
+</div></div>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#problem">Problem</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#how-i-know-it-works">How I know it works</a></li><li><a href="#result">Result</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="problem">Problem</h2>
+<p>Listings across California, Florida and Tennessee need fresh posts every week to stay visible on Google. Nobody writes about 150 posts a year per listing by hand, so listings go stale.</p>
+<figure style="max-width:568px"><div class="shot"><img src="../assets/gbp-post.webp" width="568" height="535" loading="lazy" alt="A real approved post for Gratitude Lodge in Newport Beach, written from a Los Angeles Times article about a local kratom ban, at 807 of 1,500 characters."></div><figcaption>A real production post, exactly as it was scheduled, with its source article.</figcaption></figure>
+<h2 id="how-it-works">How it works</h2>
+<p>News search queries the city, county, state and national levels together and prefers the most local results. One Claude call filters articles for relevance to the facility, and a second writes two versions from different angles. A cleaner strips the markdown and em dashes that give AI writing away. For the image, the model never writes a prompt: it picks one scene from a fixed menu. A person approves one or both versions, and Zapier schedules them to the listing.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>Scan local news</li><li>Filter</li><li>Write two versions</li><li>Illustrate</li><li class="hot">Person approves</li><li>Schedule</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>An image that misrepresents a facility. The scene menu once included a building exterior, and an AI-generated exterior meant visitors arrived at a different building than the one pictured. Exteriors were removed from the menu. Separately, the news provider failed 3 of 6 identical requests in testing. Each request gets one retry, because a third attempt made searches take over a minute.</p>
+<h2 id="how-i-know-it-works">How I know it works</h2>
+<p>72 tests, all offline with every provider mocked. Across 1,708 saved news variations there is not one em dash, and none goes over Google's 1,500-character limit.</p>
+<figure><div class="shot"><img src="../assets/gbp-workflow.webp" width="1060" height="466" loading="lazy" alt="The pipeline's workflow: scan, filter, write, illustrate, approve and schedule, with the illustrate step explained."></div><figcaption>The pipeline's workflow page, stepping through how a post gets made.</figcaption></figure>
+<h2 id="result">Result</h2>
+<p>854 news posts and 988 topic posts generated, 2,621 variations scheduled. The first post was scheduled nine days after the first commit.</p>
+<h2 id="stack">Stack</h2>
+<p>Python, Streamlit, SQLAlchemy, Claude, Gemini image models, SerpAPI, DataForSEO, Cloudinary, Zapier.</p>
+
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="authority-finder.html"><small>Previous</small><b>Authority site finder</b></a><a class="next" href="district-ops.html"><small>Next</small><b>District Ops content console</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

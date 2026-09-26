@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Authority site finder, case study</title>
+  <meta name="description" content="Finds local government, university and nonprofit sites that could link to a treatment directory&#x27;s city, county and state pages, with a contact where one can be found.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Authority site finder, case study">
+  <meta property="og:description" content="Finds local government, university and nonprofit sites that could link to a treatment directory&#x27;s city, county and state pages, with a contact where one can be found.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#authority-finder">District Behavioral Health</a></p>
+    <h1 class="display">Authority site finder</h1>
+    <p class="lede">Finds local government, university and nonprofit sites that could link to a treatment directory's city, county and state pages, with a contact where one can be found.</p>
+    <p class="project-role">First production run: 622 prospects from 72 locations for $3.35 in search spend.</p>
+    <div class="doc-actions"><span class="tool-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Private client tool. <a href="mailto:meetashirr@gmail.com">Demo on request</a></span></span></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>622</b><span>prospects from 72 locations in the first run, 589 after cleanup</span></li><li><b>$3.35</b><span>search spend for that run</span></li><li><b>82.5%</b><span>precision on a 225-row sample of the later state-level list</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>asyncio</li><li>httpx</li><li>Playwright</li><li>SerpAPI</li><li>Census API</li><li>Claude Message Batches</li><li>Postgres</li><li>FastAPI</li><li>React</li><li>Docker</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual hero-shot is-dark"><figure class="shot"><img src="../assets/mhd-casefile.webp" width="1140" height="810" alt="One location worked end to end: eleven candidate domains, one rejected for being a university in a different state, the chosen counseling page, its contact, and the competitor directories that already link to it."></figure></div></div>
+<p class="wrap hero-caption">One location replayed end to end. The campus-state check that rejects the out-of-state university was added after the first production run, when a case like this slipped through.</p>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#problem">Problem</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#how-i-know-it-works">How I know it works</a></li><li><a href="#result">Result</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="problem">Problem</h2>
+<p>Inpatient Mental Health Finder publishes 6,299 location pages. For each one, the client wanted local .gov, .edu and nonprofit sites to ask for a link. For each site they needed the specific department page rather than the homepage, an email and phone, the population served, and whether it already links to any of 16 competitor directories. Doing that by hand across thousands of pages isn't realistic.</p>
+<figure><div class="shot" style="max-width:520px"><img loading="lazy" src="../assets/finder-radar.webp" width="500" height="440" alt="The tool's radar of candidate .edu and .gov domains, with out-of-state ones struck through."></div><figcaption>The tool's radar of candidate domains. Out-of-state ones are struck through.</figcaption></figure>
+<h2 id="how-it-works">How it works</h2>
+<p>It watches both directories' sitemaps and runs only for newly published locations, with spend caps per run and per day. The schedule is paused for now. Candidates come from cached search results and are scored by named rules, not a model. There was no labelled data, and every flagged row has to be explainable. Pages are fetched with a plain client first, and with headless Chromium only when a government site blocks it. A Claude batch job proposes categories for the long tail of domains, and a category only changes after a person approves it. I also built a React and Postgres dashboard for tracking outreach. The delivered list itself is a Google Sheet.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>Watch sitemaps</li><li>Search</li><li class="hot">Prove geography</li><li>Find the page</li><li>Pull contact</li><li>Check competitors</li><li>Write row</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>Places with the same name in another state. Wyoming County, New York turned up for the state of Wyoming, and its pages mention "Wyoming" everywhere. The fix reads the state from the domain itself, using state portals, the federal .gov registry and College Scorecard data for universities. In the first production run it rejected 21 wrong-state candidates that a text check would have shipped.</p>
+<h2 id="how-i-know-it-works">How I know it works</h2>
+<p>A stratified sample of 225 of the 2,291 rows in the state-level delivery was classified against a fixed rule. Precision was 82.5%, and 17 of 17 in the high-trust band. All 265 competitor-link claims were then checked in a real browser. The project has 917 backend tests, 43 frontend tests and 42 written architecture decisions.</p>
+<figure><div class="shot"><img src="../assets/finder-steps.webp" width="1160" height="410" loading="lazy" alt="Three stages of a replayed run: a new geo page, the geography search, and proving the geography, where cornell.edu is rejected for being in New York."></div><figcaption>The tool's landing page replays a run on a Wyoming page, stage by stage.</figcaption></figure>
+<h2 id="result">Result</h2>
+<p>After the first 72 locations it ran over all 99 state pages, and the final list is 2,237 rows. About 62% have an email and 84% a phone. A full county and city pass was priced at about $1,100 in search spend, and that is the client's call. A scheduled run with nothing new to process costs nothing.</p>
+<h2 id="stack">Stack</h2>
+<p>Python, asyncio, httpx, Playwright, SerpAPI, Census API, Claude Message Batches, Postgres, FastAPI, React, Docker.</p>
+
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="site-auditor.html"><small>Previous</small><b>Site auditor</b></a><a class="next" href="gbp-pipeline.html"><small>Next</small><b>Google Business Profile content pipeline</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

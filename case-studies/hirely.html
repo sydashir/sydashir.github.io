@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hirely job agent, case study</title>
+  <meta name="description" content="Pulls postings from four job feeds. For any job you pick, Claude tailors a resume and cover letter, and the app returns a fit score and the missing keywords.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Hirely job agent, case study">
+  <meta property="og:description" content="Pulls postings from four job feeds. For any job you pick, Claude tailors a resume and cover letter, and the app returns a fit score and the missing keywords.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#hirely">Selected work</a></p>
+    <h1 class="display">Hirely job agent</h1>
+    <p class="lede">Pulls postings from four job feeds. For any job you pick, Claude tailors a resume and cover letter, and the app returns a fit score and the missing keywords.</p>
+    <p class="project-role">FastAPI backend with 47 endpoints and a React front end.</p>
+    <div class="doc-actions"><span class="tool-group"><a class="btn btn-ghost tool-link" href="https://hirely.hybridmediaworks.com/" target="_blank" rel="noopener">Open the live app<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><span class="tool-hint">live as HYBRID Job Agent, sign-in required</span></span></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>4</b><span>job feeds fetched in parallel</span></li><li><b>47</b><span>FastAPI endpoints</span></li><li><b>10</b><span>application status stages</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>FastAPI</li><li>Claude</li><li>React</li><li>TanStack Query</li><li>Tailwind</li><li>JWT auth</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual viz" role="img" aria-label="Diagram: four job feeds are fetched in parallel, and each fetch reports new, duplicate and dropped jobs with a separate error per feed. Tailoring with Claude returns a resume, cover letter, fit score and matched and missing keywords, previewed before saving. Applications move through a ten-stage status pipeline.">
+  <div class="viz-inner">
+  <div class="feeds">
+    <div class="viz-card feed"><b>Feed 1</b><span class="cnt"><span>jobs returned</span></span></div>
+    <div class="viz-card feed"><b>Feed 2</b><span class="cnt"><span>jobs returned</span></span></div>
+    <div class="viz-card feed err"><b>Feed 3</b><span class="cnt"><span>Feed error reported</span></span></div>
+    <div class="viz-card feed"><b>Feed 4</b><span class="cnt"><span>jobs returned</span></span></div>
+  </div>
+  <div class="flow-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
+  <div class="viz-card tailor"><b>Tailor with Claude, preview before saving</b>
+    <div class="outs"><span>Resume</span><span>Cover letter</span><span>Fit score</span><span>Matched and missing keywords</span></div>
+  </div>
+  <div class="flow-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
+  <div class="viz-card" style="padding:12px 13px">
+    <div class="status10"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i></div>
+    <div class="status-cap"><span>Ten-stage application status pipeline</span><span>8 resume templates, A4 print to PDF</span></div>
+  </div>
+  </div>
+</div></div>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="how-it-works">How it works</h2>
+<p>A PDF or Word resume is parsed by Claude into structured data. Saved searches fetch jobs every 1 to 48 hours, each feed and keyword in parallel. Tailoring produces a resume, a cover letter, a fit score and matched and missing keywords, previewed before anything is saved. When you tailor for a new role, similar past roles are suggested for reuse, so "Engineer" and "Developer" titles match. Resumes print to A4 PDF from eight templates, and applications move through a ten-stage status pipeline.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>Parse resume</li><li>Fetch jobs</li><li>Tailor</li><li>Preview and save</li><li>Track</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>One job feed quietly shrinking the results. Each fetch reports new, duplicate and dropped jobs, with a separate error for each feed, so a failing feed shows up instead of just returning fewer jobs.</p>
+<h2 id="stack">Stack</h2>
+<p>Python, FastAPI, Claude, React, TanStack Query, Tailwind, JWT auth with email verification and admin permissions.</p>
+
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="report-extraction.html"><small>Previous</small><b>Handwritten test report extraction</b></a><a class="next" href="repo-scanner.html"><small>Next</small><b>Repo risk scanner</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

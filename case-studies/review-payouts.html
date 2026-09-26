@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review payout automation, case study</title>
+  <meta name="description" content="Reads the review screenshots about 60 staff text in each month, extracts them with Claude Vision and works out each person&#x27;s payout.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Review payout automation, case study">
+  <meta property="og:description" content="Reads the review screenshots about 60 staff text in each month, extracts them with Claude Vision and works out each person&#x27;s payout.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#review-payouts">District Behavioral Health</a></p>
+    <h1 class="display">Review payout automation</h1>
+    <p class="lede">Reads the review screenshots about 60 staff text in each month, extracts them with Claude Vision and works out each person's payout.</p>
+    <p class="project-role">Four months of dry runs on real data: 325 reviews and $6,355 in payouts calculated, 13 to 19 minutes a run.</p>
+    <div class="doc-actions"><span class="tool-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Client code. <a href="mailto:meetashirr@gmail.com">Available on request</a></span></span></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>325</b><span>reviews in four months of dry runs</span></li><li><b>$6,355</b><span>in payouts calculated in dry runs</span></li><li><b>13–19</b><span>minutes a run</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>Claude Vision</li><li>Gmail API</li><li>Google Sheets API</li><li>Google Places API</li><li>FastAPI</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual viz" role="img" aria-label="Diagram: seven stages from pulling texts to writing sheets. A review Google's API cannot find is flagged only when the visible window of every listing that loaded covers its date, which flagged 3 of 247 Google reviews in four months; otherwise nobody is flagged. The dashboard asks for a typed CONFIRM before a live write.">
+  <div class="viz-inner">
+  <ol class="steps"><li>Pull texts</li><li>Filter noise</li><li>Read screenshot</li><li>Match staff</li><li>Apply pay rules</li><li>Merge repeats</li><li>Write sheets</li></ol>
+  <div class="decide">
+    <div class="viz-card q"><small>A review Google's API does not return. The API gives at most five per listing.</small>Does the visible window of every listing that loaded cover the review's date?</div>
+    <div class="branches">
+      <div class="viz-card branch yes"><span class="tag">Yes: flag it</span><br>Flagged for a person to check.<b>3 of 247</b>Google reviews in four months</div>
+      <div class="viz-card branch no"><span class="tag">No: not flagged</span><br>A review it can't find proves nothing. When every lookup was rejected in one month because of a key restriction, the run marked reviews "can't confirm" instead of flagging anyone.</div>
+    </div>
+  </div>
+  <div class="viz-card confirm"><span>Dashboard live write</span><span class="field">CONFIRM<span class="caret"></span></span><span class="fake-btn">Write sheets</span></div>
+  </div>
+</div></div>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#problem">Problem</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#how-i-know-it-works">How I know it works</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="problem">Problem</h2>
+<p>Staff earn a bonus for each patient review they bring in and text a screenshot as proof. One person read every screenshot by eye and typed rows into about 60 separate Google Sheets. The client put it at 4 to 6 hours a month, with recurring errors: reviews credited to the wrong facility, skipped threads, underpaid staff.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>Messages come in through the Gmail API. Spam and filler are removed by plain rules before any model is called. Each image is cleaned up, then read by Claude Vision into structured JSON, with a smaller model as fallback. The sender's number is matched to a staff record and the pay rules and monthly cap are applied. Repeat submissions of the same review on the same day are merged, keeping the higher payout.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>Pull texts</li><li>Filter noise</li><li>Read screenshot</li><li>Match staff</li><li>Apply pay rules</li><li>Merge repeats</li><li>Write sheets</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>Accusing staff of fake reviews. Google's API returns at most five reviews per listing, so a review it can't find proves nothing. A review is flagged only when the visible window of every listing that loaded covers its date. In four months that flagged 3 of 247 Google reviews. In one month every lookup was rejected because of a key restriction, and the run marked reviews "can't confirm" instead of flagging anyone.</p>
+<h2 id="how-i-know-it-works">How I know it works</h2>
+<p>Dry run is the default, commits go to a sandbox sheet first, and the dashboard asks for a typed CONFIRM before a live write. So far it has only run as a dry run. There is no labelled set yet, so I don't quote an accuracy figure.</p>
+<h2 id="stack">Stack</h2>
+<p>Python, Claude Vision, Gmail API, Google Sheets API, Google Places API, FastAPI.</p>
+
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="district-ops.html"><small>Previous</small><b>District Ops content console</b></a><a class="next" href="report-extraction.html"><small>Next</small><b>Handwritten test report extraction</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>

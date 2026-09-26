@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repo risk scanner, case study</title>
+  <meta name="description" content="Paste a public GitHub repository and get a 0 to 100 safety score covering leaked secrets, vulnerable or malicious dependencies and repository hygiene.">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta property="og:title" content="Repo risk scanner, case study">
+  <meta property="og:description" content="Paste a public GitHub repository and get a 0 to 100 safety score covering leaked secrets, vulnerable or malicious dependencies and repository hygiene.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://syedashir.com/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><span class="mark" aria-hidden="true">SA</span><span class="brand-name">Syed Ashir Hussain Shah</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="../index.html#work" aria-current="page">Work</a>
+      <a href="../index.html#writing">Writing</a>
+      <a href="../index.html#research">Research</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme"><svg class="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
+      <a class="btn btn-primary btn-sm" href="mailto:meetashirr@gmail.com">Email me</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<header class="doc-head">
+  <div class="wrap">
+    <p class="crumbs"><a href="../index.html#work">Work</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><a href="../index.html#repo-scanner">Selected work</a></p>
+    <h1 class="display">Repo risk scanner</h1>
+    <p class="lede">Paste a public GitHub repository and get a 0 to 100 safety score covering leaked secrets, vulnerable or malicious dependencies and repository hygiene.</p>
+    <p class="project-role">34 secret rules, 12 manifest formats across 7 package ecosystems, checked against OSV.dev.</p>
+    <div class="doc-actions"><a class="btn btn-ghost tool-link" href="https://github.com/sydashir/github_validaor" target="_blank" rel="noopener">View code on GitHub<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></div>
+    <div class="doc-meta">
+      <ul class="metrics"><li><b>34</b><span>secret rules, 3 of them entropy-gated</span></li><li><b>12</b><span>manifest formats, 7 ecosystems</span></li><li><b>12</b><span>offline tests, no API keys set</span></li></ul>
+      <div class="stack-block"><p>Built with</p><ul class="chips"><li>Python</li><li>FastAPI</li><li>Pydantic</li><li>httpx</li><li>OSV.dev</li><li>Claude</li></ul></div>
+    </div>
+  </div>
+</header>
+<div class="wrap doc-figure"><div class="visual viz" role="img" aria-label="Diagram: a github.com URL passes an allowlist, then secrets, dependencies and hygiene are checked. Claude writes the score, and if it is unavailable a deterministic engine scores instead. On the test fixtures a clean repository scores 99.2 (A) and one with a leaked AWS key and a malicious package scores 50.2 (F).">
+  <div class="viz-inner">
+  <div class="viz-card url-in"><span class="u">github.com/owner/repository</span><span class="ok-pill">github.com allowlist</span></div>
+  <div class="lanes">
+    <div class="viz-card lane"><b>Secrets</b><span class="n">34</span>rules: 31 provider-shaped, 3 generic with an entropy check, redacted before display</div>
+    <div class="viz-card lane"><b>Dependencies</b><span class="n">12</span>manifest formats across 7 ecosystems, checked against OSV.dev</div>
+    <div class="viz-card lane"><b>Hygiene</b><span class="n">13</span>rules, like committed .env files and missing CI</div>
+  </div>
+  <div class="scorer">
+    <div class="viz-card"><b>Claude</b>writes the score and explanation</div>
+    <div class="or">no key, rate limit,<br>network or API error</div>
+    <div class="viz-card fallback"><b>Deterministic engine</b>still returns a score</div>
+  </div>
+  <div class="viz-card scores">
+    <div class="score-row"><span>Clean repository</span><span class="sv">99.2</span><span class="gr">A</span><span class="bar"><i style="--w:99.2%"></i></span></div>
+    <div class="score-row f"><span>Leaked AWS key and a malicious package</span><span class="sv">50.2</span><span class="gr">F</span><span class="bar"><i style="--w:50.2%"></i></span></div>
+  </div>
+  </div>
+</div></div>
+<div class="wrap doc-body">
+  <nav class="toc" aria-label="On this page"><p>On this page</p><ol><li><a href="#how-it-works">How it works</a></li><li><a href="#what-it-guards-against">What it guards against</a></li><li><a href="#how-i-know-it-works">How I know it works</a></li><li><a href="#stack">Stack</a></li></ol></nav>
+  <article class="prose">
+<h2 id="how-it-works">How it works</h2>
+<p>Input is validated against a github.com allowlist, so the scanner can't be pointed at internal addresses. Secrets are found by provider-shaped patterns, plus an entropy check on generic ones, and redacted before display. Dependencies from 12 manifest formats are checked against OSV.dev for known vulnerabilities and for packages flagged as outright malicious. Thirteen hygiene rules cover things like committed .env files and missing CI. Claude writes the score and explanation.</p>
+<p class="visually-hidden">Pipeline stages, in order:</p><ol class="steps"><li>Validate URL</li><li>Walk the tree</li><li>Find secrets</li><li>Check dependencies</li><li>Check hygiene</li><li>Score</li></ol>
+<h2 id="what-it-guards-against">What it guards against</h2>
+<p>The model not being there. A missing key, a rate limit, a network error or an API error all fall back to a deterministic scoring engine, so a scan still returns a score. On the test fixtures that engine gives a clean repository 99.2 (A) and one with a leaked AWS key and a malicious package 50.2 (F). One known gap: if OSV.dev is down entirely, dependencies currently score as clean when they should score as unknown.</p>
+<h2 id="how-i-know-it-works">How I know it works</h2>
+<p>12 offline tests, all passing with no API keys set.</p>
+<h2 id="stack">Stack</h2>
+<p>Python, FastAPI, Pydantic, httpx, OSV.dev, Claude.</p>
+<div class="doc-links"><a class="cta-link" href="https://github.com/sydashir/github_validaor" target="_blank" rel="noopener">View code on GitHub<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a></div>
+  </article>
+</div>
+<nav class="pager wrap" aria-label="More case studies"><a class="prev" href="hirely.html"><small>Previous</small><b>Hirely job agent</b></a><a class="next" href="../index.html#work"><small>Back to</small><b>All work</b></a></nav>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <p style="margin:0">Syed Ashir Hussain Shah. Updated September 2026.</p>
+    <nav aria-label="Elsewhere">
+      <a href="mailto:meetashirr@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/syedashir">LinkedIn</a>
+      <a href="https://github.com/sydashir">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="../script.js"></script>
+</body>
+</html>
