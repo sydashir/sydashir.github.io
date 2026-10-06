@@ -179,3 +179,43 @@
   }
   spy(".toc", ".prose h2[id]");
 })();
+
+// Email links: many browsers have no mail app set up, so a bare mailto: does nothing.
+// Copy the address and offer Gmail or the mail app instead.
+(function () {
+  var EMAIL = "meetashirr@gmail.com";
+  var GMAIL = "https://mail.google.com/mail/?view=cm&fs=1&to=" + EMAIL;
+  var toast, hideTimer;
+
+  function showToast(copied) {
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "email-toast";
+      toast.setAttribute("role", "status");
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML =
+      '<span class="email-toast-text">' + (copied ? "Email copied: " : "Email: ") + "<strong>" + EMAIL + "</strong></span>" +
+      '<a href="' + GMAIL + '" target="_blank" rel="noopener">Open in Gmail</a>' +
+      '<a href="mailto:' + EMAIL + '">Open mail app</a>' +
+      '<button type="button" class="email-toast-close" aria-label="Close">&times;</button>';
+    toast.querySelector(".email-toast-close").addEventListener("click", function () {
+      toast.classList.remove("is-visible");
+    });
+    toast.classList.add("is-visible");
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () { toast.classList.remove("is-visible"); }, 9000);
+  }
+
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+    if (!a || a.closest(".email-toast")) return;
+    e.preventDefault();
+    var done = function (ok) { showToast(ok); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(EMAIL).then(function () { done(true); }, function () { done(false); });
+    } else {
+      done(false);
+    }
+  });
+})();
